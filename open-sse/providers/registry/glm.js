@@ -52,6 +52,7 @@ export default {
   ],
   models: [
     { id: "glm-5.3", name: "GLM 5.3" },
+    { id: "glm-5.3-flash", name: "GLM 5.3 Flash (Vision)" },
     { id: "glm-5.2", name: "GLM 5.2", upstreamModelId: "GLM-5.2" },
     { id: "glm-5.1", name: "GLM 5.1", upstreamModelId: "GLM-5.1" },
     { id: "glm-5-turbo", name: "GLM 5 Turbo", upstreamModelId: "GLM-5-Turbo" },
@@ -62,6 +63,20 @@ export default {
   ],
   oauth: {
     refreshLeadMs: 600000,
+  },
+  serviceKinds: ["llm", "webSearch"],
+  // Coding plan bundles web search on the same API key as chat.
+  searchConfig: {
+    baseUrl: "https://api.z.ai/api/mcp/web_search_prime/mcp",
+    method: "POST",
+    authType: "apikey",
+    authHeader: "bearer",
+    costPerQuery: 0,
+    searchTypes: ["web"],
+    defaultMaxResults: 5,
+    maxMaxResults: 50,
+    timeoutMs: 10000,
+    cacheTTLMs: 300000,
   },
   features: {
     usage: true,
